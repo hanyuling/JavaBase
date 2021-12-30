@@ -1,21 +1,21 @@
 package com.hanyuling.algorithm.string;
 
-public class Trip {
-    private Trip[] children;
+public class Trie {
+    private Trie[] children;
     private boolean isEnd;
 
-    public Trip(){
-        children = new Trip[26];
+    public Trie(){
+        children = new Trie[26];
         isEnd = false;
     }
 
     public void insert(String word){
-        Trip node = this;
+        Trie node = this;
         for (int i = 0; i < word.length(); i++) {
             char ch = word.charAt(i);
             int index = ch - 'a';
             if (node.children[index] == null) {
-                node.children[index] = new Trip();
+                node.children[index] = new Trie();
             }
             node = node.children[index];
         }
@@ -23,7 +23,7 @@ public class Trip {
     }
 
     public boolean search(String word) {
-        Trip node = searchPrefix(word);
+        Trie node = searchPrefix(word);
         return node != null && node.isEnd;
     }
 
@@ -31,8 +31,8 @@ public class Trip {
         return searchPrefix(prefix) != null;
     }
 
-    private Trip searchPrefix(String prefix) {
-        Trip node = this;
+    private Trie searchPrefix(String prefix) {
+        Trie node = this;
         for (int i = 0; i < prefix.length(); i++) {
             char ch = prefix.charAt(i);
             int index = ch - 'a';
@@ -45,7 +45,7 @@ public class Trip {
     }
 
     public static void main(String[] args) {
-        Trip trip = new Trip();
+        Trie trip = new Trie();
         trip.insert("world");
         trip.insert("hello");
         trip.insert("hanyuling");

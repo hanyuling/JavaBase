@@ -8,14 +8,13 @@ public class Thief {
     }
 
     public static int rob(int[] nums) {
-        var dp0 = 0;
-        var dp1 = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            var dpi0 = Math.max(dp0, dp1);
-            var dpi1 = dp0 + nums[i];
-            dp0 = dpi0;
-            dp1 = dpi1;
+        int dp0 = 0;
+        int dp1 = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int tmp = dp1;
+            dp1 = Math.max(dp1, dp0 + nums[i]);
+            dp0 = tmp;
         }
-        return dp0 > dp1 ? dp0 : dp1;
+        return dp1 > dp0 ? dp1 : dp0;
     }
 }
