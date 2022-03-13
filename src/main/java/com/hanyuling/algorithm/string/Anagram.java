@@ -20,7 +20,7 @@ public class Anagram {
         }
 
         for (int i = 0; i < t.length(); i++) {
-            int index = s.charAt(i) - 'a';
+            int index = t.charAt(i) - 'a';
             table[index] -- ;
             if (table[index] <0){
                 return false;

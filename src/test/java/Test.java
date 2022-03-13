@@ -1,72 +1,53 @@
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 public class Test {
 
 
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
-        HashMap map = new HashMap();
-        map.put("a", "d");
-
-        List<MapTest> list = new ArrayList<>();
-        MapTest mapTest = new MapTest("a", "a");
-        MapTest mapTest2 = new MapTest("a", "b");
-        MapTest mapTest3 = new MapTest("b", "b");
-        MapTest mapTest4 = new MapTest("c", "c");
-        MapTest mapTest5 = new MapTest("d", "d");
-        list.add(mapTest5);
-        list.add(mapTest2);
-        list.add(mapTest3);
-        list.add(mapTest4);
-        list.add(mapTest);
-        Map<String, MapTest> collect = list.stream().collect(Collectors.toMap(MapTest::getKey, a -> a, (a, b) -> a));
-        System.out.println(collect);
+//        System.out.println("test");
+//        test();
+//        System.out.println("test2");
+//        List<String> list = new ArrayList<>();
+//        list.add("bb");
+//        System.out.println(list);
+        ThreadPoolExecutor executorService = new ThreadPoolExecutor(1, 1, 10, TimeUnit.MINUTES, new ArrayBlockingQueue(10));
+        ExecutorService executorService2 = new ThreadPoolExecutor(2, 1, 10, TimeUnit.MINUTES, new LinkedBlockingQueue<>(10),new ThreadPoolExecutor.DiscardOldestPolicy());
+        executorService.submit(()->{
+            return 1;
+        });
 
     }
 
-
-}
-
-class ReflactTest {
-    private String t = "aa";
-}
-
-class MapTest {
-    String key;
-    String value;
-
-    public MapTest(String key, String value) {
-        this.key = key;
-        this.value = value;
+    private static void test() {
+        FileOutputStream fos = null;
+        File tmp = null;
+        try {
+             tmp = File.createTempFile("tmp", ".tmp", new File("./log"));
+            fos = new FileOutputStream(tmp, false);
+            fos.write("test".getBytes(StandardCharsets.UTF_8));
+            fos.flush();
+            tmp.delete();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+                tmp.deleteOnExit();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    public String getKey() {
-        return key;
-    }
 
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return "MapTest{" +
-                "key='" + key + '\'' +
-                ", value='" + value + '\'' +
-                '}';
-    }
-}
-
-class MyExecption extends Exception {
-    String ms = "adfadsf";
-
-    public MyExecption(String ms) {
-        super(ms);
-        this.ms = ms;
-    }
 }

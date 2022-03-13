@@ -4,13 +4,11 @@ public class FlipsList {
 
     public static void main(String[] args) {
         LinkNode head = new LinkNode(1, new LinkNode(2, new LinkNode(3, new LinkNode(4, new LinkNode(5, null)))));
-        LinkNode he = head;
 
-        LinkNode newHead = new LinkNode(0,null);
-        LinkNode flip = flip4(head,newHead);
-        while (newHead != null) {
-            System.out.println(newHead.value);
-            newHead = newHead.next;
+        LinkNode flip = flip5(head);
+        while (flip != null) {
+            System.out.println(flip.value);
+            flip = flip.next;
         }
     }
 
@@ -62,6 +60,19 @@ public class FlipsList {
         node.next = null;
         return node;
     }
+
+    public static LinkNode flip5(LinkNode head) {
+        LinkNode newHead = null;
+        LinkNode tmp = null;
+        while (head != null) {
+            tmp = head.next;
+            head.next = newHead;
+            newHead = head;
+            head = tmp;
+        }
+        return newHead;
+    }
+
 
     static class LinkNode {
         int value;
