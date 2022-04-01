@@ -4,9 +4,10 @@ public class ReadNumber {
 
 
     public static void main(String[] args) {
-//        int num = 622207405;
-        int num = Integer.MAX_VALUE;
+        int num = 600003405;
+//        int num = Integer.MAX_VALUE;
         System.out.println(num);
+        System.out.println(readNumber(num));
         System.out.println(read2(num));
     }
 
@@ -37,6 +38,45 @@ public class ReadNumber {
             u--;
             if (u % 4 == 0) {
                 sb.append(getBig(u / 4));
+            }
+            flag = false;
+        }
+        return sb.toString();
+    }
+
+    public static String readNumber(int num) {
+        char[] chars = String.valueOf(num).toCharArray();
+        StringBuilder sb = new StringBuilder();
+        int c = chars.length;
+        boolean flag = false;
+        for (int i = 0; i < chars.length; i++) {
+            char n = chars[i];
+            if (n == '0') {
+                if (c % 4 == 1) {
+                    c--;
+                    if (sb.charAt(sb.length() - 1) == '零' && sb.charAt(sb.length() - 2) != '亿') {
+                        sb = sb.deleteCharAt(sb.length() - 1);
+                        flag = false;
+                    } else if (sb.charAt(sb.length() - 1) != '零') {
+                        String big = getBig(c / 4);
+                        sb.append(big);
+                    }
+                } else {
+                    if (!flag) {
+                        sb.append(getNumber2(n));
+                    }
+                    c--;
+                    flag = true;
+                }
+                continue;
+            }
+            sb.append(getNumber2(n));
+            String unit = getUnit2(c % 4);
+            sb.append(unit);
+            c--;
+            if (c % 4 == 0) {
+                String big = getBig(c / 4);
+                sb.append(big);
             }
             flag = false;
         }

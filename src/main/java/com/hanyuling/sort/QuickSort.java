@@ -3,11 +3,13 @@ package com.hanyuling.sort;
 import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class QuickSort {
 
     public static void main(String[] args) {
         int[] nums = {2, 4, 6, 3, 7, 8, 1, 5, 9};
+//        int[] nums = {3,2,3,1,2,4,5,5,6};
         sort(nums);
         System.out.println(Arrays.toString(nums));
     }
@@ -15,33 +17,33 @@ public class QuickSort {
     public static void sort(int[] nums) {
         int low = 0;
         int high = nums.length - 1;
-        quikSort(nums, low, high);
+        quickSort(nums, low, high);
 
     }
 
-    private static void quikSort(int[] nums, int low, int high) {
+    private static void quickSort(int[] nums, int low, int high) {
         if (low >= high) {
             return;
         }
-        int i = low;
-        int j = high;
+        int i = low, j = high;
         int p = nums[i];
         while (i < j) {
-            while (i < j && p < nums[j]) {
+            while (i < j && p <= nums[j]) {
                 j--;
+            }
+            if (i < j) {
+                nums[i++] = nums[j];
             }
             while (i < j && p > nums[i]) {
                 i++;
             }
             if (i < j) {
-                int tmp = nums[i];
-                nums[i] = nums[j];
-                nums[j] = tmp;
+                nums[j--] = nums[i];
             }
         }
         nums[i] = p;
-        quikSort(nums, low, i - 1);
-        quikSort(nums, i + 1, high);
+        quickSort(nums, i + 1, high);
+        quickSort(nums, low, i - 1);
     }
 
 
