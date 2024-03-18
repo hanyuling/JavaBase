@@ -55,31 +55,5 @@ public class MergeSort {
         }
     }
 
-//    public static void mergeSort2(int[] nums) {
-//        int[] tr = new int[nums.length];
-//        int k = 1;
-//        while (k < nums.length) {
-//            mergePass(nums, tr, k, nums.length);
-//            k++;
-//            mergePass(tr, nums, k, nums.length);
-//            k++;
-//        }
-//    }
-//
-//    private static void mergePass(int[] sr, int[] tr, int s, int n) {
-//        int i = 0;
-//        int j;
-//        while (i < n - 2 * s + 1) {
-//            merge(sr, tr, i, i + s - 1, i + 2 * s - 1); //两两归并
-//            i = i + 2 * s;
-//        }
-//        if (i < n - s + 1) { // 归并最后两个序列
-//            merge(sr, tr, i, i + s - 1, n);
-//        } else { // 若最后只剩下单个子序列
-//            for (j = i; j < n; j++) {
-//                tr[j] = sr[j];
-//            }
-//        }
-//
-//    }
+
 }

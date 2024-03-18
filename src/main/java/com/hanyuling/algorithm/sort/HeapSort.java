@@ -8,7 +8,7 @@ public class HeapSort {
 //        heapSort(SortUtils.nums);
 //        System.out.println(Arrays.toString(SortUtils.nums));
         int[] aa = {4, 5, 55, 45, 34, 64, 75, 78, 65, 2, 32, 43, 654, 75, 55, 456, 64, 564, 456, 734, 894, 37, 23};
-        heapSort2(aa);
+        heapSort3(aa);
         System.out.println(Arrays.toString(aa));
     }
 
@@ -75,6 +75,33 @@ public class HeapSort {
             n = i;
         }
         nums[n] = tmp;
+    }
+
+
+    public static void heapSort3(int[] num) {
+        int length = num.length;
+        for (int i = (length-1)/2; i >=0  ; i--) {
+            adjustheap3(num, i, num.length-1);
+        }
+        for (int i = length-1; i >= 0 ; i--) {
+            SortUtils.swap(num, 0, i);
+            adjustheap3(num, 0, i-1);
+        }
+    }
+
+    private static void adjustheap3(int[] num, int n, int m) {
+        int tmp = num[n];
+        for (int i = 2*n+1; i <= m; i=2*i+1) {
+            if (i + 1 <= m && num[i] < num[i + 1]) {
+                i++;
+            }
+            if (tmp > num[i]) {
+                break;
+            }
+            num[n] = num[i];
+            n = i;
+        }
+        num[n] = tmp;
     }
 
 
