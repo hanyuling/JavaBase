@@ -17,7 +17,7 @@ public class QuickSort {
     public static void sort(int[] nums) {
         int low = 0;
         int high = nums.length - 1;
-        quickSort2(nums, low, high);
+        quickSort3(nums, low, high);
 
     }
 
@@ -70,5 +70,32 @@ public class QuickSort {
         nums[i] = tmp;
         quickSort2(nums, low, i);
         quickSort2(nums, i + 1, high);
+    }
+
+
+    public static void quickSort3(int[] nums, int low, int high) {
+        if (low >= high) {
+            return;
+        }
+        int i = low;
+        int j = high;
+        int p = nums[i];
+        while (i < j) {
+            while (i < j && nums[j] >= p) {
+                j--;
+            }
+            if (i < j) {
+                nums[i++] = nums[j];
+            }
+            while (i < j && nums[i] <= p) {
+                i++;
+            }
+            if (i < j) {
+                nums[j--] = nums[i];
+            }
+        }
+        nums[i] = p;
+        quickSort3(nums, low, i);
+        quickSort3(nums, i+1, high);
     }
 }
