@@ -11,12 +11,12 @@ public class SearchMatrix {
     }
 
     public static boolean searchMatrix2(int[][] matrix, int target){
-        int row = matrix.length - 1;
-        int col = 0;
-        while (row >=0 && col<matrix[0].length){
-            if (matrix[row][col] < target){
-                col++;
-            }else if (matrix[row][col] > target){
+       int row = matrix.length-1;
+       int clo = 0;
+        while (row >= 0 && clo <= matrix[0].length - 1) {
+            if (target > matrix[row][clo]) {
+                clo++;
+            } else if (target < matrix[row][clo]) {
                 row--;
             }else {
                 return true;
