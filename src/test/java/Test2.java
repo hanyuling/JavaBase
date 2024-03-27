@@ -16,6 +16,9 @@ public class Test2 {
         System.out.println(jsonObject);
         Map<String, String> map = getMap(jsonObject);
         System.out.println(map);
+        int i =0;
+        System.out.println(i++);
+        System.out.println(++i);
     }
 
     private static Map<String, String> getMap(JSONObject jsonObject) {

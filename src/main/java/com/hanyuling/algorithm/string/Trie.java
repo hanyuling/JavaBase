@@ -12,8 +12,8 @@ public class Trie {
     public void insert(String word){
         Trie node = this;
         for (int i = 0; i < word.length(); i++) {
-            char ch = word.charAt(i);
-            int index = ch - 'a';
+            char c = word.charAt(i);
+            int index = c - 'a';
             if (node.children[index] == null) {
                 node.children[index] = new Trie();
             }
@@ -34,9 +34,9 @@ public class Trie {
     private Trie searchPrefix(String prefix) {
         Trie node = this;
         for (int i = 0; i < prefix.length(); i++) {
-            char ch = prefix.charAt(i);
-            int index = ch - 'a';
-            if (node.children[index] == null){
+            char c = prefix.charAt(i);
+            int index = c - 'a';
+            if (node.children[index] == null) {
                 return null;
             }
             node = node.children[index];

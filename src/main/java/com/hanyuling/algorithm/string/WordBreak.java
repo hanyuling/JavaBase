@@ -62,9 +62,26 @@ public class WordBreak {
 //        String s = "leetcode";
 //        String[] wordDict = {"leet", "code"};
         List<String> list = List.of(wordDict);
-        System.out.println(wordBreak2(s, list));
+        System.out.println(wordBreak3(s, list));
 
 
     }
+
+
+    public static boolean wordBreak3(String s, List<String> wordDict) {
+        Set<String> set = new HashSet<>(wordDict);
+        boolean[] f = new boolean[s.length() + 1];
+        f[0] = true;
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (f[j] && set.contains(s.substring(j, i))) {
+                    f[i] = true;
+                    break;
+                }
+            }
+        }
+        return f[s.length()];
+    }
+    
 
 }

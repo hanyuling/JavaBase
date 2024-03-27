@@ -45,30 +45,36 @@ public class PartitionString {
     }
 
 
-    public  List<List<String>> partition2(String s) {
-        n = s.length();
-        f = new boolean[n][n];
-        for (int i = 0; i < f.length; i++) {
-            Arrays.fill(f[i], true);
+    List<List<String>> res = new ArrayList<>();
+    List<String> ans2 = new ArrayList<>();
+    boolean[][] f2 ;
+    int n2;
+
+    public List<List<String>> patition(String s) {
+        n2 = s.length();
+        f2 = new boolean[n][n];
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(f2[i], true);
         }
-        for (int i = n - 1; i >= 0; i--) {
-            for (int j = i+1; j < n; j++) {
-                f[i][j] = f[i + 1][j - 1] && s.charAt(i) == s.charAt(j);
+
+        for (int i = n-1; i >= 0 ; i--) {
+            for (int j = i + 1; j < n; j++) {
+                f2[i][j] = f2[i + 1][j - 1] && s.charAt(i) == s.charAt(j);
             }
         }
         dfs2(s, 0);
-        return ret;
+        return res;
     }
 
     private void dfs2(String s, int i) {
         if (i == n) {
-            ret.add(new ArrayList<>(ans));
+            res.add(new ArrayList<>(ans));
             return;
         }
         for (int j = i; j < n; j++) {
-            if (f[i][j]) {
+            if (f2[i][j]) {
                 ans.add(s.substring(i, j + 1));
-                dfs2(s, j + 1);
+                dfs(s, j + 1);
                 ans.remove(ans.size() - 1);
             }
         }

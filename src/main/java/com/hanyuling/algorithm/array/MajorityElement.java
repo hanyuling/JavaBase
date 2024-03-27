@@ -1,5 +1,8 @@
 package com.hanyuling.algorithm.array;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class MajorityElement {
 
     public static void main(String[] args) {
@@ -18,5 +21,18 @@ public class MajorityElement {
         }
 
         return candidate;
+    }
+
+    public static int majorityElement2(int[] nums) {
+        int count = 0;
+        Integer tmp = null;
+        for (int num : nums) {
+            if (count == 0) {
+                tmp = num;
+            }
+            count += (tmp == num ? 1 : -1);
+        }
+       
+        return tmp;
     }
 }
