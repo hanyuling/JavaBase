@@ -8,17 +8,18 @@ public class WordBreak {
 
 
     public static boolean wordBreak(String s, List<String> wordDict) {
-        boolean[] flag = new boolean[s.length() + 1];
-        flag[0] = true;
-        for (int i = 0; i <= s.length(); i++) {
-            for (int j = i - 1; j >= 0; j--) {
-                if (wordDict.contains(s.substring(j, i)) && flag[j]) {
-                    flag[i] = true;
+        HashSet<String> set = new HashSet<>(wordDict);
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && set.contains(s.substring(j, i))) {
+                    dp[i] = true;
                     break;
                 }
             }
         }
-        return flag[s.length()];
+        return dp[s.length()];
     }
 
     public static List<String> wordBreak2(String s, List<String> wordDict) {

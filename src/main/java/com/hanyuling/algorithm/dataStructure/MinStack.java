@@ -1,24 +1,28 @@
 package com.hanyuling.algorithm.dataStructure;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 public class MinStack {
-    Stack<Integer> stack;
-    Stack<Integer> min;
+    Deque<Integer> min ;
+    Deque<Integer> stack;
+
 
     public MinStack() {
-        stack = new Stack();
-        min = new Stack();
+        min = new ArrayDeque<>();
+        stack = new ArrayDeque<>();
+        min.push(Integer.MAX_VALUE);
     }
 
     public void push(int val) {
         stack.push(val);
-        min.push(min.isEmpty() ? 0 : Math.min(min.peek(), val));
+        min.push(Math.min(min.peek(), val));
     }
 
     public void pop() {
-        stack.pop();
         min.pop();
+        stack.pop();
     }
 
     public int top() {
