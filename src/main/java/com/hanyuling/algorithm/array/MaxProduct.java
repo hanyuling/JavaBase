@@ -26,4 +26,18 @@ public class MaxProduct {
 
         return Math.max(max, min);
     }
+
+    public static int maxProduct2(int[] nums) {
+        int ans = nums[0];
+        int dpa = nums[0];
+        int dpi = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            int mx = dpa;
+            int mn = dpi;
+            dpa = Math.max(mx * nums[i], Math.max(nums[i], mn * nums[i]));
+            dpi = Math.min(mn * nums[i], Math.min(nums[i], mx * nums[i]));
+            ans = Math.max(ans, dpa);
+        }
+        return ans;
+    }
 }

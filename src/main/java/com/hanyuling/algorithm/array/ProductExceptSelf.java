@@ -25,4 +25,19 @@ public class ProductExceptSelf {
         result[0] = r ;
         return result;
     }
+
+    public static int[] productExceptSelf2(int[] nums) {
+        int n = nums.length;
+        int[] res = new int[n];
+        res[0] = 1;
+        for (int i = 1; i < n; i++) {
+            res[i] = res[i - 1] * nums[i - 1];
+        }
+        int r = 1;
+        for (int i = n-1; i >=0 ; i--) {
+            res[i] = r * res[i];
+            r *= nums[i];
+        }
+        return res;
+    }
 }
