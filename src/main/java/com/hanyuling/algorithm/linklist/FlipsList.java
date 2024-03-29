@@ -98,4 +98,18 @@ public class FlipsList {
             this.next = next;
         }
     }
+
+    public static ListNode reverse(ListNode head) {
+        ListNode pre = null;
+        ListNode tmp = null;
+        ListNode curr = head;
+
+        while (curr != null) {
+            tmp = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = tmp;
+        }
+        return pre;
+    }
 }
