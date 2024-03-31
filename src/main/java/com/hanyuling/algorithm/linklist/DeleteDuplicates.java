@@ -37,4 +37,23 @@ public class DeleteDuplicates {
         }
         return dummyHead.next;
     }
+
+    public static ListNode deleteDuplicates2(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        ListNode dummyHead = new ListNode(0, head);
+        ListNode curr = dummyHead;
+        while (curr.next != null && curr.next.next != null) {
+            if (curr.next.val == curr.next.next.val) {
+                int tmp = curr.next.val;
+                while (curr.next != null && curr.next.val == tmp) {
+                    curr.next = curr.next.next;
+                }
+            } else {
+                curr = curr.next;
+            }
+        }
+        return dummyHead.next;
+    }
 }
