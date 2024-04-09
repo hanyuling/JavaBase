@@ -17,11 +17,12 @@ public class SortLinkedList {
 
     /**
      * 给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。
+     *
      * @param head
      * @return
      */
     public static ListNode sortLinkedList(ListNode head) {
-       return sortList(head, null);
+        return sortList(head, null);
     }
 
     private static ListNode sortList(ListNode head, ListNode tail) {
@@ -66,7 +67,7 @@ public class SortLinkedList {
 
         if (tmp1 != null) {
             index.next = tmp1;
-        }else if (tmp2 != null) {
+        } else if (tmp2 != null) {
             index.next = tmp2;
         }
 
@@ -212,7 +213,7 @@ public class SortLinkedList {
             node = node.next;
         }
         ListNode dummyHead = new ListNode(0, head);
-        for (int subLength = 1; subLength < n; subLength<<=1) {
+        for (int subLength = 1; subLength < n; subLength <<= 1) {
             ListNode pre = dummyHead, curr = dummyHead.next;
             while (curr != null) {
                 ListNode head1 = curr;
@@ -269,10 +270,137 @@ public class SortLinkedList {
         return dummyHead.next;
     }
 
+    public static ListNode sortLinkedList22(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        int length = 0;
+        ListNode node = head;
+        while (node != null) {
+            length++;
+            node = node.next;
+        }
+        ListNode dummyHead = new ListNode(0, head);
+        for (int sublength = 1; sublength < length; sublength <<= 1) {
+            ListNode prev = dummyHead, curr = dummyHead.next;
+            while (curr != null) {
+                ListNode head1 = curr;
+                for (int i = 1; i < sublength && curr.next != null; i++) {
+                    curr = curr.next;
+                }
+                ListNode head2 = curr.next;
+                curr.next = null;
+                curr = head2;
+                for (int i = 1; i < sublength && curr != null && curr.next != null; i++) {
+                    curr = curr.next;
+                }
+                ListNode next = null;
+                if (curr != null) {
+                    next = curr.next;
+                    curr.next = null;
+                }
+                ListNode merge = merge22(head1, head2);
+                prev.next = merge;
+                while (prev.next != null) {
+                    prev = prev.next;
+                }
+                curr = next;
+            }
+        }
+        return dummyHead.next;
+    }
+
+    private static ListNode merge22(ListNode head1, ListNode head2) {
+        ListNode dummyHead = new ListNode(0, null);
+        ListNode pre = dummyHead;
+        ListNode p1 = head1, p2 = head2;
+        while (p1 != null && p2 != null) {
+            if (p1.val < p2.val) {
+                pre.next = p1;
+                p1 = p1.next;
+                pre = pre.next;
+            } else {
+                pre.next = p2;
+                p2 = p2.next;
+                pre = pre.next;
+            }
+        }
+        if (p1 != null) {
+            pre.next = p1;
+        }
+        if (p2 != null) {
+            pre.next = p2;
+        }
+        return dummyHead.next;
+    }
+
+
+    public static ListNode sortLinkedList33(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+
+        int length = 0;
+        ListNode node = head;
+        while (node != null) {
+            length++;
+            node = node.next;
+        }
+        ListNode dummyHead = new ListNode(0, head);
+        for (int subLength = 1; subLength < length; subLength <<= 1) {
+            ListNode pre = dummyHead, curr = dummyHead.next;
+            while (curr != null) {
+                ListNode head1 = curr;
+                for (int i = 1; i < subLength && curr.next != null; i++) {
+                    curr = curr.next;
+                }
+                ListNode head2 = curr.next;
+                curr.next = null;
+                curr = head2;
+                for (int i = 1; i < subLength && curr != null && curr.next != null; i++) {
+                    curr = curr.next;
+                }
+                ListNode next = null;
+                if (curr != null) {
+                    next = curr.next;
+                    curr.next = null;
+                }
+                ListNode merge = merge33(head1, head2);
+                pre.next = merge;
+                if (pre.next != null) {
+                    pre = pre.next;
+                }
+                curr = next;
+            }
+        }
+        return dummyHead.next;
+    }
+
+    private static ListNode merge33(ListNode head1, ListNode head2) {
+        ListNode dummyHead = new ListNode(0);
+        ListNode p = dummyHead;
+        ListNode p1 = head1, p2 = head2;
+        while (p1 != null && p2 != null) {
+            if (p1.val <= p2.val) {
+                p.next = p1;
+                p1 = p1.next;
+            } else {
+                p.next = p2;
+                p2 = p2.next;
+            }
+            p = p.next;
+        }
+        if (p1 != null) {
+            p.next = p1;
+        }
+        if (p2 != null) {
+            p.next = p2;
+        }
+        return dummyHead.next;
+    }
+
+
 }
-
-
-
 
 
 

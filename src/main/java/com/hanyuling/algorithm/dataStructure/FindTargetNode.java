@@ -1,6 +1,5 @@
 package com.hanyuling.algorithm.dataStructure;
 
-import com.hanyuling.algorithm.dataStructure.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;

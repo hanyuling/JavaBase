@@ -32,4 +32,15 @@ public class FisherYates {
         nums[i] = nums[j];
         nums[j] = tmp;
     }
+
+    public int[] shuffle2(){
+        Random random1 = new Random();
+        for (int i = 0; i < nums.length; i++) {
+            int j = i + random1.nextInt(nums.length - i);
+            int tmp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = tmp;
+        }
+        return nums;
+    }
 }

@@ -45,4 +45,16 @@ public class MoveZeroes {
         nums[right] = temp;
     }
 
+    public static void moveZero3(int[] nums) {
+        int n = nums.length;
+        int left = 0, right = 0;
+        while (right < n) {
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+        }
+    }
+
 }

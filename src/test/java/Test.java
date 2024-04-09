@@ -22,8 +22,14 @@ public class Test {
         queue.add(14);
         System.out.println(queue.poll());
         System.out.println(queue.poll());
-
+        String a = "2";
+        func(a);
+        System.out.println(a);
     }
+    static void func(String a) {
+        a = "3";
+    }
+
 
     TreeNode ans = null;
 
